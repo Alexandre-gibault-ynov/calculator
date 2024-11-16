@@ -4,10 +4,19 @@ declare(strict_types = 1);
 
 namespace App;
 
+use App\Parsers\ExpressionParser;
+use App\Validators\OperandValidator;
 use InvalidArgumentException;
 
 final class Calculator
 {
+    private ExpressionParser $parser;
+    private OperandValidator $validator;
+
+    function __construct() {
+        $this->parser = new ExpressionParser();
+        $this->validator = new OperandValidator();
+    }
 
     /**
      * Returns the result of the operation contained in the given expression.
@@ -19,37 +28,18 @@ final class Calculator
      */
     public function calculate(array $expression) : int
     {
-        $result = $this->validateOperand(array_shift($expression));
+        $parsedExpression = $this->parser->parse($expression);
 
-        while(count($expression) > 0) {
+        $result = $this->validator->validate(array_shift($parsedExpression)['value']);
 
-            $operatorString = array_shift($expression);
-            $operator = OperatorEnum::tryFrom($operatorString);
-            if ($operator === null) {
-                throw new InvalidArgumentException("Invalid operator: $operatorString");
-            }
-
-            $rightOperand = $this->validateOperand(array_shift($expression));
+        while(!empty($parsedExpression)) {
+            $operator = array_shift($parsedExpression)['value'];
+            $rightOperand = $this->validator->validate(array_shift($parsedExpression)['value']);
 
             $operation = OperationFactory::create($operator);
             $result = $operation->calculate($result, $rightOperand);
         }
 
         return $result;
-    }
-
-    /**
-     * Validate an operand. Returns the value of the operand if it's numeric.
-     * Else throws an invalid argument exception.
-     *
-     * @param string $operand The operand to validate.
-     * @return int The value of the operand.
-     * @throws InvalidArgumentException If the operand is not numeric.
-     */
-    private function validateOperand(string $operand): int {
-        if (!is_numeric($operand)) {
-            throw new \InvalidArgumentException("Invalid operand: $operand");
-        }
-        return (int)$operand;
     }
 }
