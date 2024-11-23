@@ -6,7 +6,7 @@ namespace App;
 
 use App\Parsers\ExpressionParser;
 use App\Parsers\ExpressionTree\ExpressionTree;
-use App\Validators\OperandValidator;
+use App\Validators\ExpressionValidator;
 use InvalidArgumentException;
 
 final class Calculator
@@ -27,6 +27,8 @@ final class Calculator
      */
     public function calculate(array $expression) : int
     {
+        ExpressionValidator::validate($expression);
+
         $postfixExpression = $this->parser->parse($expression);
 
         $tree = new ExpressionTree();
