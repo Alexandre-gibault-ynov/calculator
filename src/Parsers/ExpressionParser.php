@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Parsers;
 
 use App\OperatorEnum;
+use App\Validators\OperandValidator;
 use InvalidArgumentException;
 
 final class ExpressionParser
@@ -18,19 +19,15 @@ final class ExpressionParser
      */
     public function parse(array $expression): array
     {
-        if (count($expression) < 3 || count($expression) % 2 === 0) {
-            throw new InvalidArgumentException("Invalid expression format.");
-        }
 
         $postfixExpression = [];
         $operators = [];
 
-        foreach ($expression as $element) {
-            $is_operand = is_numeric($element);
+        foreach ($expression as $token) {
 
-            if ($is_operand) {
-                $postfixExpression[] = $element;
-            } else if ($operator = OperatorEnum::tryFrom($element)) {
+            if (OperandValidator::isValid($token)) {
+                $postfixExpression[] = (int)$token;
+            } else if ($operator = OperatorEnum::tryFrom($token)) {
 
                 while (!empty($operators) && $this->hasHigherPrecedence(end($operators), $operator)) {
                     $postfixExpression[] = array_pop($operators);
@@ -38,7 +35,7 @@ final class ExpressionParser
                 $operators[] = $operator;
 
             } else {
-                throw new InvalidArgumentException("Invalid Token: $element");
+                throw new InvalidArgumentException("Invalid Token: $token");
             }
         }
 
