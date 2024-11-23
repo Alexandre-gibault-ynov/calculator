@@ -12,9 +12,9 @@ use RuntimeException;
 final class ExpressionTree
 {
     /**
-     * @var OperationInterface|null Root of the expression tree
+     * @var NodeInterface|null Root of the expression tree
      */
-    private ?OperationInterface $root = null;
+    private ?NodeInterface $root = null;
 
     public function build(array $postfixExpression):void {
         $stack = [];

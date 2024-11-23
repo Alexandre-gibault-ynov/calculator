@@ -63,7 +63,7 @@ final class ExpressionParser
             OperatorEnum::DIVIDE->value => 2,
         ];
 
-        return $precedence[$operator1->value] >= $operator2[$operator2->value];
+        return $precedence[$operator1->value] >= $precedence[$operator2->value];
     }
 
 
