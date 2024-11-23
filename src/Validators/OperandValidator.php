@@ -6,20 +6,15 @@ namespace App\Validators;
 
 use InvalidArgumentException;
 
-class OperandValidator
+final class OperandValidator
 {
     /**
-     * Validate an operation operand by testing if it's value is numeric.
-     * Return the operand int value.
+     * Check if the given operand is a number.
      *
-     * @param string $operand The operand to validate
-     * @return int The operand int value
-     * @throws InvalidArgumentException If the operand is not numeric
+     * @param string|int|float $operand The operand to validate.
+     * @return bool True if the operand is a number, else false.
      */
-    public static function validate(string $operand): int {
-        if (!is_numeric($operand)) {
-            throw new InvalidArgumentException("Invalid operand: $operand");
-        }
-        return (int)$operand;
+    public static function isValid(string|int|float $operand): bool {
+        return is_numeric($operand);
     }
 }
