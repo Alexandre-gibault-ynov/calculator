@@ -7,7 +7,7 @@ namespace App\Parsers\ExpressionTree;
 use App\Operations\OperationInterface;
 use App\Parsers\ExpressionTree;
 
-class OperationNode implements NodeInterface
+final class OperationNode implements NodeInterface
 {
     /**
      * @var OperationInterface The operation of the node.
