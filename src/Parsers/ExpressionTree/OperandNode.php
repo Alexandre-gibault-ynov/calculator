@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Parsers\ExpressionTree;
 
-class OperandNode implements NodeInterface
+final class OperandNode implements NodeInterface
 {
 
     /**
