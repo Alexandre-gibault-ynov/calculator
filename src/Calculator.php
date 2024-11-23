@@ -5,17 +5,16 @@ declare(strict_types = 1);
 namespace App;
 
 use App\Parsers\ExpressionParser;
+use App\Parsers\ExpressionTree\ExpressionTree;
 use App\Validators\OperandValidator;
 use InvalidArgumentException;
 
 final class Calculator
 {
     private ExpressionParser $parser;
-    private OperandValidator $validator;
 
     function __construct() {
         $this->parser = new ExpressionParser();
-        $this->validator = new OperandValidator();
     }
 
     /**
@@ -28,18 +27,11 @@ final class Calculator
      */
     public function calculate(array $expression) : int
     {
-        $parsedExpression = $this->parser->parse($expression);
+        $postfixExpression = $this->parser->parse($expression);
 
-        $result = $this->validator->validate(array_shift($parsedExpression)['value']);
+        $tree = new ExpressionTree();
+        $tree->build($postfixExpression);
 
-        while(!empty($parsedExpression)) {
-            $operator = array_shift($parsedExpression)['value'];
-            $rightOperand = $this->validator->validate(array_shift($parsedExpression)['value']);
-
-            $operation = OperationFactory::create($operator);
-            $result = $operation->calculate($result, $rightOperand);
-        }
-
-        return $result;
+        return $tree->evaluate();
     }
 }
