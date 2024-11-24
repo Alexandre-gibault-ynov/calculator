@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Parsers\ExpressionTree;
 
 use App\OperationFactory;
-use App\Operations\OperationInterface;
 use App\OperatorEnum;
 use RuntimeException;
 
@@ -16,6 +15,10 @@ final class ExpressionTree
      */
     private ?NodeInterface $root = null;
 
+    /**
+     * @param array<string> $postfixExpression
+     * @return void
+     */
     public function build(array $postfixExpression):void {
         $stack = [];
 
@@ -39,6 +42,11 @@ final class ExpressionTree
         $this->root = array_pop($stack);
     }
 
+    /**
+     * Evaluate the expression tree and return its numeric value.
+     *
+     * @return int Numeric result of the tree expression
+     */
     public function evaluate(): int {
         if ($this->root === null) {
             throw new RuntimeException("Expression tree is not built.");

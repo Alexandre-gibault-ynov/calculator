@@ -14,7 +14,7 @@ final class ExpressionParser
      * Parse an operation expression into a postfix expression.
      *
      * @param string[] $expression The operation expression.
-     * @return array<int, array{type: string, value: string}> Parsed operation expression.
+     * @return array<string> Parsed operation expression.
      * @throws InvalidArgumentException The expression is invalid.
      */
     public function parse(array $expression): array
@@ -26,7 +26,7 @@ final class ExpressionParser
         foreach ($expression as $token) {
 
             if (OperandValidator::isValid($token)) {
-                $postfixExpression[] = (int)$token;
+                $postfixExpression[] = $token;
             } else if ($operator = OperatorEnum::tryFrom($token)) {
 
                 while (!empty($operators) && $this->hasHigherPrecedence(end($operators), $operator)) {
