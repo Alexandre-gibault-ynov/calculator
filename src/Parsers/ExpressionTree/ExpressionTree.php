@@ -6,6 +6,7 @@ namespace App\Parsers\ExpressionTree;
 
 use App\OperationFactory;
 use App\OperatorEnum;
+use App\Validators\OperandValidator;
 use RuntimeException;
 
 final class ExpressionTree
@@ -16,18 +17,18 @@ final class ExpressionTree
     private ?NodeInterface $root = null;
 
     /**
-     * @param array<string> $postfixExpression
+     * @param string[] $postfixExpression
      * @return void
      */
     public function build(array $postfixExpression):void {
         $stack = [];
 
         foreach ($postfixExpression as $token) {
-            $is_operand = is_numeric($token);
+            $operator = OperatorEnum::tryFrom($token);
 
-            if ($is_operand) {
+            if (OperandValidator::isValid($token)) {
                 $stack[] = new OperandNode((int) $token);
-            } else if ($token instanceof OperatorEnum) {
+            } else if ($operator instanceof OperatorEnum) {
                 $right = array_pop($stack);
                 $left = array_pop($stack);
 
