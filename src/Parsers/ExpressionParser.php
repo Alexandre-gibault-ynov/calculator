@@ -30,14 +30,20 @@ final class ExpressionParser
                 $postfixExpression[] = $token;
             } else if ($operator) {
 
-                while (!empty($operators) && $this->hasHigherPrecedence(end($operators), $token)) {
+                while (
+                    !empty($operators) &&
+                    $operators[array_key_last($operators)] !== '(' &&
+                    $this->hasHigherPrecedence(end($operators), $token)
+                ) {
                     $postfixExpression[] = array_pop($operators);
                 }
                 $operators[] = $token;
 
             } elseif ($token === '(') {
                 $operators[] = $token;
+
             } elseif ($token === ')') {
+
                 while (!empty($operators) && $operators[array_key_last($operators)] !== '(') {
                     $postfixExpression[] = array_pop($operators);
                 }
