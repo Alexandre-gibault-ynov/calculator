@@ -26,9 +26,9 @@ final class OperationFactory
      * @return OperationInterface The operation of the given operator.
      * @throws InvalidArgumentException If the operator is not correct.
      */
-    public static function create(OperatorEnum $operator) : OperationInterface
+    public static function create(string $operator) : OperationInterface
     {
-        return match ($operator) {
+        return match (OperatorEnum::tryFrom($operator)) {
             OperatorEnum::ADD => new Sum(),
             OperatorEnum::SUBTRACT => new Subtraction(),
             OperatorEnum::MULTIPLY => new Product(),

@@ -21,7 +21,7 @@ final class Calculator
      * Returns the result of the operation contained in the given expression.
      * throws an exception if the user give a non-numeric operand.
      *
-     * @param array $expression Expression of the operation.
+     * @param string[] $expression Expression of the operation.
      * @return int The result of the operation.
      * @throws InvalidArgumentException If the operation contains a non-numeric operand or an invalid operator.
      */
