@@ -8,7 +8,7 @@ use App\Enums\OperatorEnum;
 use App\ExpressionTree\Nodes\NodeInterface;
 use App\ExpressionTree\Nodes\OperandNode;
 use App\ExpressionTree\Nodes\OperationNode;
-use App\OperationFactory;
+use App\Factories\OperationFactory;
 use App\Validators\OperandValidator;
 use RuntimeException;
 
