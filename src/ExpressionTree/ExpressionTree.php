@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Parsers\ExpressionTree;
+namespace App\ExpressionTree;
 
+use App\Enums\OperatorEnum;
+use App\ExpressionTree\Nodes\NodeInterface;
+use App\ExpressionTree\Nodes\OperandNode;
+use App\ExpressionTree\Nodes\OperationNode;
 use App\OperationFactory;
-use App\OperatorEnum;
 use App\Validators\OperandValidator;
 use RuntimeException;
 

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Operations\OperationInterface;
-use App\Operations\Sum;
-use App\Operations\Subtraction;
-use App\Operations\Product;
+use App\Enums\OperatorEnum;
 use App\Operations\Division;
+use App\Operations\OperationInterface;
+use App\Operations\Product;
+use App\Operations\Subtraction;
+use App\Operations\Sum;
 use InvalidArgumentException;
 
 

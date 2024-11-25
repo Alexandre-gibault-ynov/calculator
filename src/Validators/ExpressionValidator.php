@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Validators;
 
-use App\OperatorEnum;
+use App\Enums\OperatorEnum;
 use InvalidArgumentException;
 
 final class ExpressionValidator

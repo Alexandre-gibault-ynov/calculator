@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Calculator;
-use App\FileReader;
+use App\FileLoader;
 
 if ($argc !== 2) {
     echo "Usage: php calc.php <file_path>\n";
@@ -14,7 +14,7 @@ if ($argc !== 2) {
 
 $filePath = $argv[1];
 
-$fileReader = new FileReader();
+$fileReader = new FileLoader();
 try {
     $expression = $fileReader->readExpression($filePath);
 

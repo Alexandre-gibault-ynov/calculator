@@ -6,7 +6,7 @@ namespace App;
 
 use RuntimeException;
 
-class FileReader
+class FileLoader
 {
 
     /**

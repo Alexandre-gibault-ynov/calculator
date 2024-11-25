@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Parsers;
 
-use App\OperatorEnum;
+use App\Enums\OperatorEnum;
 use App\Validators\OperandValidator;
 use InvalidArgumentException;
 

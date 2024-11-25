@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace App;
 
+use App\ExpressionTree\ExpressionTree;
 use App\Parsers\ExpressionParser;
-use App\Parsers\ExpressionTree\ExpressionTree;
 use App\Validators\ExpressionValidator;
 use InvalidArgumentException;
 

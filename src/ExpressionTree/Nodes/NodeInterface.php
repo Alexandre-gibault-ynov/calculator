@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Parsers\ExpressionTree;
+namespace App\ExpressionTree\Nodes;
 
 /**
  * Represent a node on an expression tree
