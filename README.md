@@ -35,7 +35,7 @@ A simple command-line calculator application built in PHP. This calculator suppo
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/yourusername/cli-calculator.git
+   git clone https://github.com/Alexandre-gibault-ynov/calculator.git
    cd cli-calculator
    ```
 
